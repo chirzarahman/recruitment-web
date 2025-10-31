@@ -50,11 +50,15 @@ class LoginController extends Controller
 
             // 3. Logika Redirect berdasarkan Role
             if ($user->role === 'hrd') {
-                return redirect()->intended(route('hrd.dashboard'));
+                return redirect()->intended(route('dashboard'));
             } 
             
             if ($user->role === 'candidate') {
                 return redirect()->intended(route('candidate.profile'));
+            }
+            
+            if ($user->role === 'manager') {
+                return redirect()->intended(route('dashboard'));
             }
 
             // Fallback redirect jika role tidak dikenali

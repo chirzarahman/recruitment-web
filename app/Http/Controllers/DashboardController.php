@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\HRD;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
@@ -35,7 +35,7 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
-        return view('hrd.dashboard', compact(
+        return view('dashboard', compact(
             'openVacanciesCount',
             'totalApplicantsCount',
             'newApplicantsTodayCount',
