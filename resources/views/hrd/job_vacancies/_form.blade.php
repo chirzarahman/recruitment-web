@@ -21,8 +21,8 @@
     <div class="col-md-6 mb-3">
         <label for="status" class="form-label">Status</label>
         <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
-            <option value="open" {{ old('status`, $vacancy->status ?? '') == 'open' ? 'selected' : '' }}>Dibuka</option>
-            <option value="closed" {{ old('status', $vacancy->status ?? '') == 'closed' ? 'selected' : '' }}>Ditutup
+            <option value="open" {{ old('status', $vacancy->status ?? '') == 'Open' ? 'selected' : '' }}>Dibuka</option>
+            <option value="closed" {{ old('status', $vacancy->status ?? '') == 'Closed' ? 'selected' : '' }}>Ditutup
             </option>
         </select>
         @error('status')

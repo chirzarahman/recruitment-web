@@ -59,10 +59,10 @@ class JobVacancyController extends Controller
     public function update(Request $request, JobVacancy $lowongan)
     {
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'status' => 'required|in:open,closed',
-            'deadline_at' => 'nullable|date|after_or_equal:today',
+            'title' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'nullable|in:open,closed',
+            'deadline_at' => 'nullable|date',
         ]);
 
         $lowongan->update($validatedData);
