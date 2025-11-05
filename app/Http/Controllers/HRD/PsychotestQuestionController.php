@@ -11,7 +11,7 @@ class PsychotestQuestionController extends Controller
 {
     public function index()
     {
-        $questions = PsychotestQuestion::with('options')->latest()->paginate(10);
+        $questions = PsychotestQuestion::with('options')->latest()->paginate();
         return view('hrd.psychotest_questions.index', compact('questions'));
     }
 

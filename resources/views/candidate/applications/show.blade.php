@@ -132,8 +132,8 @@
                         <div>
                             @if ($uploadedDocumentsMap->has($docName))
                             <span class="badge bg-success me-2">Uploaded</span>
-                            <!-- <a href="{{ asset('storage/' . $uploadedDocumentsMap[$docName]->file_path) }}"
-                                target="_blank" class="btn btn-sm btn-outline-secondary">Lihat</a> -->
+                            <a href="{{ asset('storage/' . $uploadedDocumentsMap[$docName]->file_path) }}"
+                                target="_blank" class="btn btn-sm btn-outline-secondary">Lihat</a>
                             @else
                             <span class="badge bg-danger me-2">Missing</span>
                             @endif

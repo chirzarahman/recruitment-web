@@ -28,7 +28,7 @@ class PsychotestController extends Controller
         }
 
         // Ambil 10 soal secara acak sebagai contoh
-        $questions = PsychotestQuestion::with('options')->inRandomOrder()->take(10)->get();
+        $questions = PsychotestQuestion::with('options')->inRandomOrder()->get();
 
         return view('psychotest.show', compact('questions', 'application'));
     }

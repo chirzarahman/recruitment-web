@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:hrd'])->prefix('hrd')->name('hrd.')->group(func
     Route::resource('lowongan', HrdJobVacancyController::class)->names('job_vacancies');
 
     // Pelamar
+    Route::get('/pelamar/lamaran/{application}', [HRDApplicationController::class, 'getDocuments'])->name('applications.ambilDokumen');
     Route::get('/pelamar', [HRDApplicationController::class, 'index'])->name('applications.index');
     Route::patch('/pelamar/{application}/update-status', [HRDApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
 

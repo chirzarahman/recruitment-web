@@ -11,6 +11,28 @@ use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
+    public function getDocuments(Application $application)
+    {
+        // HAPUS SEMENTARA Otorisasi jika itu yang menyebabkan error 403 atau 500
+        // if (Auth::user()->level !== 'hrd') { abort(403, 'Akses ditolak...'); }
+
+        // Coba dd() di sini untuk memastikan Anda mendapat objek Application yang benar
+        // dd($application); 
+
+        // Eager Load data dokumen dan user
+        $application->load(['documents', 'user']);
+
+        // Coba dd() di sini untuk memastikan relasi documents sudah termuat
+        // dd($application->documents); // <--- INI PENTING!
+
+        // Jika dd($application->documents) berhasil menampilkan koleksi dokumen,
+        // maka masalahnya ada di file Blade Anda.
+
+        // Hapus dd() di atas dan kembalikan kode aslinya jika sudah selesai debug.
+        $documents = $application->documents;
+        return view('hrd.applications.dokumen_list', compact('application', 'documents'));
+    }
+    
     /**
      * Menampilkan daftar semua pelamar dengan filter.
      */

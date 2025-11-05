@@ -101,6 +101,10 @@
                             <td class="fw-bold text-primary">{{ $application->testResult->score ?? '-' }}</td>
                             <td>{{ $application->created_at->isoFormat('D MMM YY') }}</td>
                             <td class="text-center">
+                                <a href="{{ route('hrd.applications.ambilDokumen', $application->id) }}"
+                                    class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-file-earmark-text"></i> Dokumen
+                                </a>
                                 @if (in_array($application->status, ['menunggu_seleksi', 'tes_psikotes',
                                 'wawancara_pertama', 'wawancara_kedua']))
                                 <div class="btn-group" role="group">
@@ -143,4 +147,63 @@
         </div>
     </div>
 </div>
+
+<!-- <div class="modal fade" id="documentsModal" tabindex="-1" aria-labelledby="documentsModalLabel" aria-hidden="true">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const documentsModal = document.getElementById('documentsModal');
+    const modalBodyContent = documentsModal.querySelector('#modalBodyContent');
+    const loadingState = documentsModal.querySelector('#loadingState');
+
+    documentsModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        const fetchUrl = button.getAttribute('data-url');
+        // ... (Kode setup state, hapus yang lama, tampilkan loading) ...
+        modalBodyContent.innerHTML = '';
+        modalBodyContent.style.display = 'none';
+        loadingState.style.display = 'block';
+
+        if (!fetchUrl) {
+            /* ... handle error ... */
+            return;
+        }
+
+        // Lakukan Permintaan AJAX (Fetch API)
+        fetch(fetchUrl, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Jika status 4xx atau 5xx, kita tetap baca JSON-nya
+                    return response.json().then(data => {
+                        throw new Error(data.html || 'Gagal memuat dokumen. Status: ' +
+                            response.status);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Berhasil: masukkan konten HTML
+                modalBodyContent.innerHTML = data.html;
+            })
+            .catch(error => {
+                console.error('Fetch Error:', error);
+                // Tampilkan pesan error di modal
+                modalBodyContent.innerHTML =
+                    `<div class="alert alert-danger">Error: ${error.message}</div>`;
+            })
+            .finally(() => {
+                // Sembunyikan loading state dan tampilkan konten
+                loadingState.style.display = 'none';
+                modalBodyContent.style.display = 'block';
+            });
+    });
+    // ... (Kode hidden.bs.modal) ...
+});
+</script> -->
 @endsection
