@@ -40,6 +40,7 @@ Route::middleware(['auth', 'role:manager,hrd'])->group(function () {
 Route::middleware(['auth', 'role:manager'])->prefix('manager')->name('manager.')->group(function () {
     Route::get('/laporan', [DashboardController::class, 'laporan'])->name('laporan');
     Route::get('/pelamar', [HRDApplicationController::class, 'index'])->name('applications.index');
+    Route::get('/pelamar/lamaran/{application}', [HRDApplicationController::class, 'getDocuments'])->name('applications.ambilDokumen');
 });
 
 // HRD Routes
