@@ -8,7 +8,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\CandidateProfileController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HRD\ApplicationController as HRDApplicationController;
-use App\Http\Controllers\HRD\DashboardController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HRD\JobVacancyController as HrdJobVacancyController;
 use App\Http\Controllers\HRD\PsychotestQuestionController;
 use App\Http\Controllers\JobVacancyController;
@@ -32,14 +32,26 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // == APPLICATION ROUTES (DESTINATIONS) ==
 
+Route::middleware(['auth', 'role:manager,hrd'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+// Manager Routes
+Route::middleware(['auth', 'role:manager'])->prefix('manager')->name('manager.')->group(function () {
+    Route::get('/laporan', [DashboardController::class, 'laporan'])->name('laporan');
+    Route::get('/pelamar', [HRDApplicationController::class, 'index'])->name('applications.index');
+    Route::get('/pelamar/lamaran/{application}', [HRDApplicationController::class, 'getDocuments'])->name('applications.ambilDokumen');
+});
+
 // HRD Routes
 Route::middleware(['auth', 'role:hrd'])->prefix('hrd')->name('hrd.')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 
     Route::resource('lowongan', HrdJobVacancyController::class)->names('job_vacancies');
 
     // Pelamar
+    Route::get('/pelamar/lamaran/{application}', [HRDApplicationController::class, 'getDocuments'])->name('applications.ambilDokumen');
     Route::get('/pelamar', [HRDApplicationController::class, 'index'])->name('applications.index');
     Route::patch('/pelamar/{application}/update-status', [HRDApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
 

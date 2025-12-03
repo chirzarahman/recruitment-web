@@ -35,7 +35,7 @@ class CandidateProfileController extends Controller
             'date_of_birth' => 'required|date|before:today',
             'gender' => 'required|in:laki-laki,perempuan',
             'phone_number' => 'required|string|min:10|max:15',
-            'address' => 'required|string|min:20',
+            'address' => 'required|string',
         ]);
 
         $profile = Auth::user()->candidateProfile;
